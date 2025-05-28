@@ -145,24 +145,6 @@ intersect (x : xs) (y : ys) | y < x = intersect (x : xs) ys
 intersect (x : xs) (y : ys) | x == y = x : intersect xs ys
 
 --- ### powerset
-
--- don't forget to put the type declaration or you will lose points!
-
--- def powerset(lst):
--- result = [[]]  # start with the empty subset
--- for elem in lst:
---     # for each element, add it to all existing subsets
---     new_subsets = [subset + [elem] for subset in result]
---     result.extend(new_subsets)
--- return result
-
-highUnion :: (Ord a) => [[a]] -> [[a]] -> [[a]]
-highUnion l1 [] = l1
-highUnion [] l2 = l2
-highUnion (x : xs) (y : ys)
-  | P.head x < P.head y = x : highUnion xs (y : ys)
-  | otherwise = y : highUnion (x : xs) ys
-
 -- def powerset(lst):
 --   result = [[]]  # start with the empty subset
 --   for elem in lst:
@@ -172,10 +154,7 @@ highUnion (x : xs) (y : ys)
 --   return result
 
 powerset :: Eq a => [a] -> [[a]]
-powerset = P.foldl step [[]]
-  where
-    step acc x = union acc [x : subset | subset <- acc]
-
+powerset _ = [[]]
 --- Higher Order Functions
 --- ----------------------
 -- [[],[0],[1],[0,1]] -- expected
