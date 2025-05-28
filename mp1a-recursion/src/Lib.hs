@@ -163,17 +163,18 @@ highUnion (x : xs) (y : ys)
   | P.head x < P.head y = x : highUnion xs (y : ys)
   | otherwise = y : highUnion (x : xs) ys
 
--- powerset :: Ord a => [a] -> [[a]]
--- powerset nl = aux nl [[]]
---   where aux [] m = m
---         aux (x : xs) m = aux xs (highUnion ([add x n | n <- m]) m)
+-- def powerset(lst):
+--   result = [[]]  # start with the empty subset
+--   for elem in lst:
+--       # for each element, add it to all existing subsets
+--       new_subsets = [subset + [elem] for subset in result]
+--       result.extend(new_subsets)
+--   return result
 
-powerset :: [a] -> [[a]]
-powerset [] = [[]]
-powerset (x : xs) = merge (powerset xs) x
+powerset :: Eq a => [a] -> [[a]]
+powerset = P.foldl step [[]]
   where
-    merge [] _ = []
-    merge (ys : yss) x = ys : (x : ys) : merge yss
+    step acc x = union acc [x : subset | subset <- acc]
 
 --- Higher Order Functions
 --- ----------------------
