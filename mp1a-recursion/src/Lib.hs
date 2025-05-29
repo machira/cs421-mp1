@@ -157,8 +157,6 @@ powerset :: Eq a => [a] -> [[a]]
 powerset _ = [[]]
 --- Higher Order Functions
 --- ----------------------
--- [[],[0],[1],[0,1]] -- expected
--- [[],[0],[0,1],[1]] -- actual
 --- ### inclist'
 
 -- don't forget to put the type declaration or you will lose points!
