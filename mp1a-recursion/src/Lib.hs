@@ -153,8 +153,12 @@ intersect (x : xs) (y : ys) | x == y = x : intersect xs ys
 --       result.extend(new_subsets)
 --   return result
 
-powerset :: Eq a => [a] -> [[a]]
-powerset _ = [[]]
+powerset :: (Ord a) => [a] -> [[a]]
+powerset s = aux s [[]]
+  where
+    aux [] m = m
+    aux (x : xs) m = aux xs (union [add x sub | sub <- m] m)
+
 --- Higher Order Functions
 --- ----------------------
 --- ### inclist'
